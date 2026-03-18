@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Login — Secure Document Vault{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+  <div class="auth-left">
+    <div class="auth-brand">
+      <div class="brand-icon-lg">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h1 class="auth-brand-name">SECURE<br>DOCUMENT<br>VAULT</h1>
+    </div>
+    <div class="auth-features">
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <span>AES-256 Encryption at rest</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <span>Per-file cryptographic keys</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <span>Owner-only access control</span>
+      </div>
+      <div class="feature-item">
+        <div class="feature-dot"></div>
+        <span>Full audit trail</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Access the Vault</h2>
+        <p>Enter your credentials to continue</p>
+      </div>
+
+      <form method="post" class="auth-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="form-label" for="id_username">Username</label>
+          <input type="text" name="username" id="id_username" class="form-input" placeholder="your_username" required autofocus />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="id_password">Password</label>
+          <input type="password" name="password" id="id_password" class="form-input" placeholder="••••••••••" required />
+        </div>
+        <button type="submit" class="btn-primary btn-full">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Unlock Vault
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>No account? <a href="{% url 'register' %}" class="link">Create one →</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
