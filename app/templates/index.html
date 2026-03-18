@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Secure Document Vault{% endblock %}
+{% block content %}
+<style>
+  .hero {
+    min-height: 78vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+  }
+  .hero-tag {
+    font-family: var(--mono); font-size: .72rem;
+    color: var(--accent); text-transform: uppercase; letter-spacing: .25em;
+    border: 1px solid rgba(0,229,255,.3);
+    padding: .3rem .9rem; border-radius: 20px;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    animation: fadeIn .8s ease both;
+  }
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800; line-height: 1.05;
+    margin-bottom: 1rem;
+    animation: fadeIn .9s ease .1s both;
+  }
+  .hero-title .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-desc {
+    max-width: 520px; font-family: var(--mono); font-size: .88rem;
+    color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem;
+    animation: fadeIn 1s ease .2s both;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeIn 1s ease .3s both; }
+  .features {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem; margin-top: 5rem;
+    animation: fadeIn 1.2s ease .4s both;
+  }
+  .feature-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.5rem;
+    transition: border-color .3s;
+  }
+  .feature-card:hover { border-color: rgba(0,229,255,.4); }
+  .feature-icon {
+    font-size: 1.5rem; margin-bottom: .75rem;
+    width: 44px; height: 44px;
+    background: rgba(0,229,255,.08); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feature-title { font-weight: 700; margin-bottom: .4rem; font-size: .95rem; }
+  .feature-desc { font-family: var(--mono); font-size: .77rem; color: var(--muted); line-height: 1.7; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+</style>
+
+<div class="hero">
+  <span class="hero-tag">🔒 Military-Grade Encryption</span>
+  <h1 class="hero-title">
+    Your Files,<br>
+    <span class="line2">Encrypted &amp; Protected.</span>
+  </h1>
+  <p class="hero-desc">
+    Upload documents and they're instantly encrypted using AES-128 with per-file
+    key derivation. Only you can decrypt and download them. Every action is logged.
+  </p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ url_for('auth.register') }}">Get Started →</a>
+    <a class="btn btn-secondary" href="{{ url_for('auth.login') }}">Sign In</a>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feature-card">
+    <div class="feature-icon">🔐</div>
+    <div class="feature-title">Fernet Encryption</div>
+    <div class="feature-desc">AES-128-CBC + HMAC-SHA256. Every file gets a unique key derived with PBKDF2 (260k iterations).</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">👤</div>
+    <div class="feature-title">Owner-Only Access</div>
+    <div class="feature-desc">Strict ownership checks. No admin backdoors. Only the uploader can decrypt their files.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📋</div>
+    <div class="feature-title">Full Audit Trail</div>
+    <div class="feature-desc">Every upload, download, and deletion is logged with timestamp, IP, and user agent.</div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🛡️</div>
+    <div class="feature-title">Zero Plaintext Storage</div>
+    <div class="feature-desc">Files are encrypted in memory before hitting disk. The original bytes never touch storage.</div>
+  </div>
+</div>
+{% endblock %}
